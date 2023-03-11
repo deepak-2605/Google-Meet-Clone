@@ -1,7 +1,6 @@
-
 const socket=io('/');
-console.log(socket);
-console.log(window.location.origin);
+// console.log(socket);
+// console.log(window.location.origin);
 const videoGrid=document.getElementById('video-grid');
 var myPeer = new Peer(undefined,{
     path:'/peerjs',
@@ -10,18 +9,20 @@ var myPeer = new Peer(undefined,{
 })
 const myVideo=document.createElement('video');
 myVideo.muted=true;
+const peers={};
 // We don't want to listen to our own video and hence muting our video
 let myVideoStream;
 navigator.mediaDevices.getUserMedia({
     video:true,
     audio:true
-}).then(stream=>{
-    myVideoStream=stream;
+}).then(stream=>{ 
    addVideoStream(myVideo,stream);
-
+   myVideoStream=stream;
+//    to listen and send our stream
    myPeer.on('call',call=>{
     call.answer(stream);
     const video=document.createElement('video');
+    // to listen for their video
     call.on('stream',userVideoStream=>{
         addVideoStream(video,userVideoStream)
     })
@@ -59,7 +60,7 @@ socket.on('user-disconnected',userId=>{
     if(peers[userId]) peers[userId].close();
 })
 
-
+// As user connect to room,we want to run this code
 myPeer.on('open',id=>{
     socket.emit('join-room', ROOM_ID, id);
 })
@@ -69,8 +70,10 @@ myPeer.on('open',id=>{
 //          console.log('User connected:' + userId);
 //      })
 function connectToNewUser(userId,stream){
+    // It's going to call a user with given userId and we're passing stream to the user
     const call=myPeer.call(userId,stream);
     const video=document.createElement('video');
+    // call.on listen for their video stream or when they send their video stream
     call.on('stream',userVideoStream=>{
         addVideoStream(video,userVideoStream)
     })
@@ -84,65 +87,34 @@ function addVideoStream(video,stream){
     video.addEventListener('loadedmetadata',()=>{
         video.play();
     })
+    video.classList.add('video-item');
     videoGrid.append(video);
 }
-// var jQuery=$.noConflict();
-  
-//  console.log('hello');
-// jQuery( document ).ready(function( $ ) {
-//   // Code that uses jQuery's $ can follow here.
-//   console.log('hello');
-// });
-// // when press enter send message
-
-// jQuery('html').keydown(function (e) {
-//   if (e.which == 13 && text.val().length !== 0) {
-//     socket.emit('message', text.val());
-//     text.val('')
-//   }
-// });
-// jQuery(document).ready(function($){
-//      jQuery('#username').on('keyup paste',username_check);
-//     console.log('hello');
-//  });
- 
- 
-//  function username_check(){ 
-//      setTimeout( function() {
-//          var username = jQuery('#username').val();
-//          console.log(username);
-//      },100);
-//      if(username == "" || username.length <= 0){
-//        alert("error");
-//      }
-//  }
 const scrollToBottom=()=>{
     let d=jQuery('.main__chat_window');
     d.scrollTop(d.prop("scrollHeight"));
 }
 // Mute our Video
-
 const muteUnmute=()=>{
     let enabled=myVideoStream.getAudioTracks()[0].enabled;
     if(enabled){
         myVideoStream.getAudioTracks()[0].enabled=false;
-        console.log('setMuted');
+        // console.log('setMuted');
         setUnmuteButton();
     }
     else{
-        console.log('setUnmuted');
+        // console.log('setUnmuted');
         setMuteButton();
         myVideoStream.getAudioTracks()[0].enabled=true;
     }
 }
 const playStop = () => {
-    console.log('object')
     let enabled = myVideoStream.getVideoTracks()[0].enabled;
-    if (enabled) {
+    if (enabled){
       myVideoStream.getVideoTracks()[0].enabled = false;
-      setPlayVideo()
+      setPlayVideo();
     } else {
-      setStopVideo()
+      setStopVideo();
       myVideoStream.getVideoTracks()[0].enabled = true;
     }
   }

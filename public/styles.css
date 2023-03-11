@@ -21,7 +21,22 @@
     align-items: center;
     padding: 40px;
 }
-
+#video-grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.video-item{
+    width: 47%;
+    height: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 12px;
+}
+video{
+    border-radius: 1000px;
+}
 .main__controls {
     background-color: #1C1E20;
 }

@@ -22,12 +22,7 @@ app.get('/meeting',(req,res)=>{
 app.get('/:room',(req,res)=>{
   res.render('room',{roomId:req.params.room});
 })
-app.get('/whiteboard',(req,res)=>{
-    res.redirect(`/whiteboard/${a}`);
-})
-app.get('/whiteboard/:room',(req,res)=>{
-    res.render('whiteboards',{roomId:req.params.room})
-})
+
 // app.get('/:room',(req,res)=>{
 //     res.render('room',{roomId:req.params.room})
 //     // The second parameter is storing id in roomsID and making it available to view
@@ -37,6 +32,7 @@ app.get('/whiteboard/:room',(req,res)=>{
 io.on('connection',socket=>{
     socket.on('join-room',(roomId,userId)=>{
          socket.join(roomId);
+        //  console.log(roomId);
         //  socket.to(roomId).broadcast.emit('user-connected',userId);
         // replacing this with newer version
 
@@ -49,5 +45,5 @@ io.on('connection',socket=>{
         })
     })
 })
-server.listen(process.env.PORT||3030); 
+server.listen(process.env.PORT||443); 
 
