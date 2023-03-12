@@ -59,7 +59,7 @@
    </div>
 </body>
 <script>
-  linkjoin.addEventListener("keypress",(e)=>{
+  window.addEventListener("keypress",(e)=>{
     if(e.key==="Enter"){
         let value=linkjoin.value;
         location.href=`http://localhost:443/${value}`;
