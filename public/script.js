@@ -7,6 +7,9 @@ var myPeer = new Peer(undefined,{
     host:'/',
     port:'443'
 })
+let username = sessionStorage.getItem("username");
+// console.log(typeof(username));
+console.log(username);
 const myVideo=document.createElement('video');
 myVideo.muted=true;
 const peers={};
@@ -28,7 +31,7 @@ navigator.mediaDevices.getUserMedia({
     })
 })
 
-   socket.on('user-connected',userId=>{
+   socket.on('user-connected',(userId,username)=>{
     console.log('user connected');
     setTimeout(connectToNewUser,1000,userId,stream);      
 })
@@ -49,9 +52,9 @@ jQuery(document).ready(function($){
         }
       });
 })
-socket.on('createMessage',message=>{
+socket.on('createMessage',(message,username)=>{
     console.log(message);
-    jQuery('.messages').append(`<li class="message"><b>user</b><br>${message}</li>`);
+    jQuery('.messages').append(`<li class="message"><b>${username}</b><br>${message}</li>`);
     scrollToBottom();
  })
  
@@ -62,7 +65,7 @@ socket.on('user-disconnected',userId=>{
 
 // As user connect to room,we want to run this code
 myPeer.on('open',id=>{
-    socket.emit('join-room', ROOM_ID, id);
+    socket.emit('join-room',ROOM_ID, id,username);
 })
 // socket.emit send an event to the server
 

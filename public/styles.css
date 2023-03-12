@@ -28,14 +28,18 @@
     align-items: center;
 }
 .video-item{
-    width: 47%;
-    height: 50%;
+    width: 48%;
+    height:250px;
     margin-left: 10px;
-    margin-right: 10px;
+    margin-right: 7px;
     border-radius: 12px;
+    margin-top: 10px;
+    object-fit: contain;
+    border: 2px solid red;
 }
 video{
     border-radius: 1000px;
+    width: 100%;
 }
 .main__controls {
     background-color: #1C1E20;

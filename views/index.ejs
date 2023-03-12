@@ -1,90 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <script >
-        const ROOM_ID= "<%= roomId%>";
-    </script>
-   
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/7fb9c5c8bb.js" crossorigin="anonymous"></script>
-    <script defer src="https://unpkg.com/peerjs@1.4.5/dist/peerjs.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <!-- to use socket.io in frontend -->
-    <script src="/socket.io/socket.io.js" defer></script>
-    <script src="script.js" defer></script>    
-    <title>Document</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>Google Meet</title>
+    <link rel="icon" type="image/png" href="../public/fav.png">
+    <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
-    <div class="main">
-        <div class="main__left">
-           <div class="main__videos">
-              <div id="video-grid">
-                 
-              </div>
-           </div>
-           <div class="main__controls">
-              <div class="main__controls__block">
-                 <div onclick="muteUnmute()" class="main__controls__button main__mute_button">
-                    <i class="fas fa-microphone"></i>
-                    <span></span>
-                 </div>
-                 <div onclick="playStop()" class="main__controls__button main__video_button" >
-                    <i class="fas fa-video"></i>
-                    <span></span>
-                 </div>
-              
-                 <div class="main__controls__button">
-                  <i class="fa-solid fa-hand"></i>
-                    <span></span>
-                 </div>
-                 <div class="main__controls__button">
-                  <i class="fa-solid fa-display"></i>
-                    <span></span>
-                 </div>
-                 <div class="main__controls__button">
-                    <i class="fas fa-comment-alt"></i>
-                    <span class=""></span>
-                 </div>
-              
-                 <div class="main__controls__button" id="leave" onclick="location.href='/'">
-                  <i class="fa-solid fa-phone-slash"></i>
-                    <span class="leave_meeting"></span>
-                 </div>
-              </div>
-              <div class="secondary_controls_block">
-               <div class="secondary_controls_button info">
-                   <i class="fa-solid fa-info"></i>
-                   <span></span>
-               </div>
-               <div class="secondary_controls_button user">
-                    <i class="fa-solid fa-user-group"></i>
-                    <span></span>
-               </div>
-               <div class="secondary_controls_button ">
-                  <i class="fas fa-comment-alt"></i>
-                  <span></span>
-               </div>
-              </div>
-           </div>
+    <div class="top_bar">
+        <div class="left_side">
+            <div class="logo">
+                <a href="#"><img src="/horizontal2.png" alt="google" style="width:164px; height:40px;"></img></a>
+            </div>
         </div>
-        <div class="main__right">
-           <div class="main__header">
-              <h6>In-call messages</h6>
-           </div>
-           <div class="main__chat_window">
-              <ul class="messages">  
-              </ul>
-           </div>
-           <div class="main__message_container">
-              <input id="username" type="text" placeholder="Type message here...">
-           </div>
         </div>
-     </div>
-      
+    </div> 
+   <div class="remaining">
+    <div class="text">
+        <div class="main">
+            <h1>Premium video meeting.</h1>
+            <h1>Now free for everyone.</h1>
+        </div>
+        <div class="exp">
+            <p>We re-engineered the service we built for secure business </p>
+            <p> meetings, Google meet, to make it availbale and free for all </p>
+        </div>
+        <div class="buttons">
+            <div class="user">
+                <input type="text" placeholder="Enter your name" id="username" required>
+            </div>
+            <div class="join">
+                <button type="button" onclick="location.href='/meeting';" class="jbutton" id="jbutton"><strong>New Meeting</strong></button>
+            </div>
+            <div class="link">
+                <input type="text" id="linkjoin" placeholder="Enter a code or link" class="link">
+            </div>
+        </div>
+        <div class="breaker">
+            <hr>
+        </div>
+        <div class="bottom">
+            <p><a href="#" class="learn">Learn More</a> about Google Meet</p>
+        </div>
+    </div>   
+    <div class="toggle">
+        <div class="left_button">
+           <button  class="lb" onclick="document.getElementById('container').src='/i11.jpg'">&lt</button>
+        </div>
+        <div class="container">
+           <img src="/i11.jpg" id="container" width="350px" height="350px">
+        </div>
+        <div class="right_button">
+           <button class="rb" onclick="document.getElementById('container').src='/i21.jpg'">&gt</button>
+        </div>
+    </div>
+   </div>
 </body>
+<script>
+  linkjoin.addEventListener("keypress",(e)=>{
+    if(e.key==="Enter"){
+        let value=linkjoin.value;
+        location.href=`http://localhost:443/${value}`;
+        var username=document.getElementById("username").value;
+        console.log(username);
+        sessionStorage.setItem("username",username);
+    }
+  })
+  jbutton.addEventListener("click",(e)=>{
+    let username=document.getElementById("username").value;
+       if(username===""){
+         username="Anonymous";
+       }
+        // console.log(username);
+        sessionStorage.setItem("username",username);
+  })
+</script>
 </html>
