@@ -35,6 +35,9 @@ Meeting id
 ![meetingid](https://user-images.githubusercontent.com/108828387/228776882-ce2b756c-a270-4dba-8692-bb89eb217121.png)
  Selected text is your meeting id
  
+ ![joinbyid](https://user-images.githubusercontent.com/108828387/228778712-24a6794e-ac6a-4d4e-9f20-65ee4b910647.png)
+
+ 
  ![meeting](https://user-images.githubusercontent.com/108828387/228777702-c92a7266-d5c1-4452-984b-b6b9a9e514c2.png)
  You can mute/unmute ,hide/show their video and use chatbox for sending messages during meeting
 
