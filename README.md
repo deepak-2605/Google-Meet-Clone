@@ -27,6 +27,7 @@ User can mute/unmute,turnon/turnoff their video and end their video.
 
 
 5. Enter your name and click on new meeting to start meeting or you can enter your meeting id to join the meeting
+(After entering meeting id press enter don't click on new meeting otherwise it will start new meeting)
 
 ![videocall1](https://user-images.githubusercontent.com/108828387/228776587-a477d33e-919a-448c-b597-09d803da296f.png)
  
